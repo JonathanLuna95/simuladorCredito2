@@ -44,3 +44,50 @@ function guardarTasa(){
     mostrarTexto("mensajeTasa","La tasa debe estar entre 10 y 20");
   }
 }
+
+function guardarCliente(){
+  let cedula = recuperarTexto("txtCedula");
+  let nombre = recuperarTexto("txtNombre");
+  let apellido = recuperarTexto("txtApellido");
+  let ingresos = recuperarFloat("txtIngresos");
+  let egresos = recuperarFloat("txtEgresos");
+
+  console.log("Cédula:", cedula);
+  console.log("Nombre:", nombre);
+  console.log("Apellido:", apellido);
+  console.log("Ingresos:", ingresos);
+  console.log("Egresos:", egresos);
+
+  let cliente = {};
+  cliente.cedula = cedula;
+  cliente.nombre = nombre;
+  cliente.apellido = apellido;
+  cliente.ingresos = ingresos;
+  cliente.egresos = egresos;
+
+  clientes.push(cliente);
+  console.log(clientes);
+
+  pintarClientes();
+}
+
+function pintarClientes(){
+  let contenidoTabla = "";
+  let cliente;
+  for (let indice=0; indice < clientes.length; indice++){
+    cliente = clientes[indice];
+
+    contenidoTabla += "<tr>";
+    contenidoTabla += "<td>" + cliente.cedula + "</td>";
+    contenidoTabla += "<td>" + cliente.nombre + "</td>";
+    contenidoTabla += "<td>" + cliente.apellido + "</td>";
+    contenidoTabla += "<td>" + cliente.ingresos + "</td>";
+    contenidoTabla += "<td>" + cliente.egresos + "</td>";
+    contenidoTabla += "<td>";
+    contenidoTabla += "<button>Actualizar</button> ";
+    contenidoTabla += "<button>Eliminar</button>";
+    contenidoTabla += "</td>";
+    contenidoTabla += "</tr>";
+  }
+  document.getElementById("tablaClientes").innerHTML = contenidoTabla;
+}
