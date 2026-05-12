@@ -296,6 +296,29 @@ function asignarCredito(){
 
   creditos.push(credito);
   alert("Crédito asignado correctamente");
+  limpiarCredito();
+}
+
+function limpiarCredito(){
+  mostrarTextoEnCaja("buscarCedulaCredito", "");
+  mostrarTextoEnCaja("montoCredito", "");
+  mostrarTextoEnCaja("plazoCredito", "");
+
+  document.getElementById("datosClienteCredito").innerHTML = "";
+  document.getElementById("resultadoCredito").innerHTML = "";
+  document.getElementById("resultadoCredito").className = "";
+
+  document.getElementById("btnSolicitarCredito").disabled = true;
+
+  clienteSeleccionado = null;
+  cuotaCalculada = 0;
+  montoCalculado = 0;
+  plazoCalculado = 0;
+  creditoAprobado = false;
+}
+
+function limpiarBusquedaCreditos(){
+  mostrarTextoEnCaja("buscarCedulaListado", "");
 }
 
 function buscarCreditos(cedula){
@@ -324,7 +347,7 @@ function pintarCreditos(creditos){
                   "<td>" + elementoCredito.monto + "</td>"+
                   "<td>" + elementoCredito.tasa + "</td>"+
                   "<td>" + elementoCredito.plazo + "</td>"+
-                  "<td>" + elementoCredito.cuota + "</td>"+
+                  "<td>" + elementoCredito.cuota.toFixed(2) + "</td>"+
                   "</tr>";
   }
   TABLA.innerHTML = filas; 
@@ -339,4 +362,5 @@ function buscarCreditosCliente(){
 
   // Pintamos la Tabla solo de créditos encontrados
   pintarCreditos(creditosEncontrados);
+  limpiarBusquedaCreditos();
 }
