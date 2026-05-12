@@ -27,6 +27,11 @@ function ocultarSecciones() {
   let listaClass3 = componente3.classList;
 
   listaClass3.remove("activa");
+
+  let componente4 = document.getElementById("listaCreditos");
+  let listaClass4 = componente4.classList;
+
+  listaClass4.remove("activa");
 }
 
 function mostrarSeccion(id) {
@@ -276,4 +281,62 @@ function calcularCredito(){
     document.getElementById("btnSolicitarCredito").disabled = true;
   }
   
+}
+
+function asignarCredito(){
+  let credito = {
+    cedula : clienteSeleccionado.cedula,
+    nombre : clienteSeleccionado.nombre,
+    apellido : clienteSeleccionado.apellido,
+    monto : montoCalculado,
+    tasa : tasaInteres,
+    plazo : plazoCalculado,
+    cuota : cuotaCalculada
+  }
+
+  creditos.push(credito);
+  alert("Crédito asignado correctamente");
+}
+
+function buscarCreditos(cedula){
+  let creditosEncontrados = [];
+  for(let indice=0 ; indice<creditos.length ; indice++){
+    let elementoCredito = creditos[indice];
+
+    if (elementoCredito.cedula == cedula){
+      creditosEncontrados.push(elementoCredito);
+    }
+  }
+   return creditosEncontrados;
+}
+
+function pintarCreditos(creditos){
+
+  const TABLA = document.getElementById("tablaCreditos");
+  let filas = "";
+  for (let indice=0 ; indice<creditos.length ; indice++){
+    let elementoCredito = creditos[indice];
+    
+    filas = filas + "<tr>"+
+                  "<td>" + elementoCredito.cedula + "</td>"+
+                  "<td>" + elementoCredito.nombre + "</td>"+
+                  "<td>" + elementoCredito.apellido + "</td>"+
+                  "<td>" + elementoCredito.monto + "</td>"+
+                  "<td>" + elementoCredito.tasa + "</td>"+
+                  "<td>" + elementoCredito.plazo + "</td>"+
+                  "<td>" + elementoCredito.cuota + "</td>"+
+                  "</tr>";
+  }
+  TABLA.innerHTML = filas; 
+}
+
+function buscarCreditosCliente(){
+  //Tomamos la cédula ingresada en la sección de Créditos Registrados
+  let cedula = recuperarTexto("buscarCedulaListado");
+
+  // Invocamos a la función buscarCreditos
+  let creditosEncontrados = buscarCreditos(cedula);
+
+  // Pintamos la Tabla solo de créditos encontrados
+  pintarCreditos(creditosEncontrados);
 }
