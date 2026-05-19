@@ -32,6 +32,11 @@ function ocultarSecciones() {
   let listaClass4 = componente4.classList;
 
   listaClass4.remove("activa");
+
+  let componente5 = document.getElementById("contactos");
+  let listaClass5 = componente5.classList;
+
+  listaClass5.remove("activa");
 }
 
 function mostrarSeccion(id) {
@@ -62,6 +67,7 @@ function guardarCliente() {
   let apellido = recuperarTexto("txtApellido");
   let ingresos = recuperarFloat("txtIngresos");
   let egresos = recuperarFloat("txtEgresos");
+  let email = recuperarTexto("txtEmail");
 
   let clienteEncontrado = buscarCliente(cedula);
 
@@ -72,6 +78,7 @@ function guardarCliente() {
     cliente.apellido = apellido;
     cliente.ingresos = ingresos;
     cliente.egresos = egresos;
+    cliente.email = email;
 
     clientes.push(cliente);
   } else {
@@ -79,6 +86,7 @@ function guardarCliente() {
     clienteEncontrado.apellido = apellido;
     clienteEncontrado.ingresos = ingresos;
     clienteEncontrado.egresos = egresos;
+    clienteEncontrado.email = email;
   }
 
   pintarClientes();
@@ -95,6 +103,7 @@ function pintarClientes() {
     contenidoTabla += "<td>" + cliente.cedula + "</td>";
     contenidoTabla += "<td>" + cliente.nombre + "</td>";
     contenidoTabla += "<td>" + cliente.apellido + "</td>";
+    contenidoTabla += "<td>" + cliente.email + "</td>";
     contenidoTabla += "<td>" + cliente.ingresos + "</td>";
     contenidoTabla += "<td>" + cliente.egresos + "</td>";
     contenidoTabla += "<td>";
@@ -127,6 +136,7 @@ function seleccionarCliente(cedula) {
     mostrarTextoEnCaja("txtCedula", clienteEncontrado.cedula);
     mostrarTextoEnCaja("txtNombre", clienteEncontrado.nombre);
     mostrarTextoEnCaja("txtApellido", clienteEncontrado.apellido);
+    mostrarTextoEnCaja("txtEmail", clienteEncontrado.email);
     mostrarTextoEnCaja("txtIngresos", clienteEncontrado.ingresos);
     mostrarTextoEnCaja("txtEgresos", clienteEncontrado.egresos);
 
@@ -138,6 +148,7 @@ function limpiar() {
   mostrarTextoEnCaja("txtCedula", "");
   mostrarTextoEnCaja("txtNombre", "");
   mostrarTextoEnCaja("txtApellido", "");
+   mostrarTextoEnCaja("txtEmail", "");
   mostrarTextoEnCaja("txtIngresos", "");
   mostrarTextoEnCaja("txtEgresos", "");
 
